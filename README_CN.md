@@ -47,7 +47,9 @@ ARGS:
 ```
 
 `input`参数用来指定要优化的wasm合约文件，可使用[ontology-wasm-cdt-cpp](https://github.com/ontio/ontology-wasm-cdt-cpp)或者[ontology-wasm-cdt-rust](https://github.com/ontio/ontology-wasm-cdt-rust)开发生成。
+
 `output`参数用来指定优化后的wasm合约文件名
+
 `keep-custom`用来设置输出的wasm文件是否保留`custom_section`,只用于调试用
 
 ## License
