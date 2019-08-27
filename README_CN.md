@@ -14,6 +14,7 @@
 * 检查合约的内存和Table使用上限是否超过规定的值，防止恶意的合约攻击
 * 清理data section中的零值
 * 清理custom section
+* 检查优化后的合约大小不超过规定值
 
 ## 安装方式
 1. 从[releases](https://github.com/ontio/ontio-wasm-build/releases)中直接下载二进制
