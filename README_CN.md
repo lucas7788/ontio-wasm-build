@@ -1,29 +1,37 @@
 ## ontio-wasm-build
 
-[![Build Status](https://travis-ci.com/laizy/ontio-wasm-build.svg?branch=master)](https://travis-ci.com/laizy/ontio-wasm-build)
+[![Build Status](https://travis-ci.com/ontio/ontio-wasm-build.svg?branch=master)](https://travis-ci.com/ontio/ontio-wasm-build)
 
 [English](README.md) | 中文
 
-Ontology wasm合约验证和优化工具, wasm合约要想在Ontology链上成功运行,需要满足Ontology链的一些约定,比如，合约入口函数必须是`invoke`、合约中不支持浮点数、和链的交互只能调用Ontology暴露出的接口,为了防止恶意的攻击，Ontology wasm合约还限制了每个合约内存占用上限以及`table`限制。在将高级语言编写的程序编译成wasm字节码的过程中, 会生成许多无用的`exports`，这些无用的`exports`反过来又会生成很多无用的`import`,该工具会清理无用的`export_section`模块代码。
+`ontio-wasm-build`是Ontology wasm合约的校验和优化工具，在部署合约到链上前，使用该工具能够对wasm合约的二进制码进行解析校验，同时对合约中无效的信息进行清理删除，缩减合约的大小，减少部署费用。
 
-## License
+主要的检查优化项：
+* 合约存在入口函数`invoke`,参数和返回值均为空;
+* 清理合约中没有使用的函数，导入导出项;
+* 检查合约中的浮点数指令;
+* 导入项只能是Ontology runtime api;
+* 检查合约的内存和Table使用上限，防止恶意的合约攻击
+* 清理data section中的零值
+* 清理custom section
 
-This project is licensed under the [MIT license](LICENSE).
-
-## 生成可执行文件
-执行如下的命令生成可执行文件
+## 安装方式
+1. 从[releases](https://github.com/ontio/ontio-wasm-build/releases)中直接下载二进制
+1. cargo install安装
+```bash
+cargo install --git=https://github.com/ontio/ontio-wasm-build
 ```
-cargo build
+2. 源码安装
+```bash
+git clone https://github.com/ontio/ontio-wasm-build
+cd ontio-wasm-build
+cargo build --release
 ```
 
-生成的可执行文件`ontio-wasm-build`在`target`文件夹。
-
-通过 `--help`查看`ontio-wasm-build`的使用方法
-
+## 使用方式
 ```
-$ ./target/debug/ontio-wasm-build --help
+$ ontio-wasm-build --help
 ontio-wasm-build 0.1.0
-does awesome things
 
 USAGE:
     ontio-wasm-build [FLAGS] <input> <output>
@@ -38,14 +46,9 @@ ARGS:
     <output>    Output wasm file name
 ```
 
-`input`参数用来指定要优化的wasm文件
-`output`参数用来指定优化后的wasm字节码文件名
+`input`参数用来指定要优化的wasm合约文件，可使用[ontology-wasm-cdt-cpp](https://github.com/ontio/ontology-wasm-cdt-cpp)或者[ontology-wasm-cdt-rust](https://github.com/ontio/ontology-wasm-cdt-rust)开发生成。
+`output`参数用来指定优化后的wasm合约文件名
 
-## WASM字节码优化
+## License
 
-在将高级语言如C、C++和Rust等编写的代码使用`emscripten`编译器编译许多无用的`exports`,这些`exports`反过来编译出许多无用的`imports`并保留了未使用的函数,这些未使用的代码，会使得wasm合约文件较大，部署到链上需要更多的手续费，该工具会删除这些未使用的代码，使得生成的wasm文件更加精简.
-
-## WASM字节码校验
-
-WASM合约要想运行在Ontology链上，要使用Ontology约定的统一入口函数`invoke`,并将该函数导出`export`以供外部调用,该函数签名不应该有返回值并且该函数签名不接受参数。
-
+This project is licensed under the [MIT license](LICENSE).
