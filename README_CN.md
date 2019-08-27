@@ -17,11 +17,11 @@
 
 ## 安装方式
 1. 从[releases](https://github.com/ontio/ontio-wasm-build/releases)中直接下载二进制
-1. cargo install安装
+2. cargo install安装
 ```bash
 cargo install --git=https://github.com/ontio/ontio-wasm-build
 ```
-2. 源码安装
+3. 源码安装
 ```bash
 git clone https://github.com/ontio/ontio-wasm-build
 cd ontio-wasm-build
