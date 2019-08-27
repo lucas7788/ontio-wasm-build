@@ -17,6 +17,7 @@
 * 检查优化后的合约大小不超过规定值
 
 ## 安装方式
+可以使用以下任一种方式进行安装：
 1. 从[releases](https://github.com/ontio/ontio-wasm-build/releases)中直接下载二进制
 2. cargo install安装
 ```bash

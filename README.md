@@ -4,23 +4,25 @@
 
 English | [中文](README_CN.md)
 
-A wasm contract validation and optimization tool for Ontology.Before deploying the contract to the chain, the tool can parse and verify the binary code of wasm contract, at the same time clean up and delete the invalid information in the contract, reduce the size of the contract and reduce the deployment cost.
+A wasm contract validation and optimization tool for Ontology.
+Before deploying the contract to the chain, this tool can parse and verify the binary code of wasm contract,
+clean up unused information in the contract to reduce the contract size and deployment cost.
 
-Major Check Optimizations:
-* The contract has an entry function `invoke', and both parameters and return values are null.
-* Clean up functions not used in contracts, import and export items;
-* Check Floating Point Instructions in Contracts;
-* Check that all imports are Ontology runtime API and that the input and output parameters match perfectly
-* Check the memory of the contract and whether the upper limit of Table usage exceeds the specified value to prevent malicious contract attacks;
-* Clean up zeros in data section
-* Clean up custom section
-* Check that the size of the optimized contract does not exceed the specified value
+validation and optimizations:
+* The contract has an exported entry function `invoke`, with empty parameters and return values;
+* Clean up functions,import and export entries not used in contracts;
+* Check floating point instructions in contracts;
+* Check that all imports are Ontology runtime API with correct signatures;
+* Check memory and table limits not exceeding the specified value to prevent malicious contract attacks;
+* Clean up zeros in data section;
+* Clean up custom section;
+* Check that the size of the optimized contract does not exceed the specified value;
 
 ## Install
-
+You can use one of the following method to install:
 1. download binary file from [releases](https://github.com/ontio/ontio-wasm-build/releases)
 
-2. cargo install
+2. use `cargo` to install
 ```bash
 cargo install --git=https://github.com/ontio/ontio-wasm-build
 ```
@@ -49,12 +51,11 @@ ARGS:
     <output>    Output wasm file name
 ```
 
-`input`parameter is used to specify the wasm contract file to be optimized, generated with [ontology-wasm-cdt-cpp](https://github.com/ontio/ontology-wasm-cdt-cpp) and [ontology-wasm-cdt-rust](https://github.com/ontio/ontology-wasm-cdt-rust)。
+`input`parameter is used to specify the wasm contract file to be optimized, generated with [ontology-wasm-cdt-cpp](https://github.com/ontio/ontology-wasm-cdt-cpp) or [ontology-wasm-cdt-rust](https://github.com/ontio/ontology-wasm-cdt-rust)。
 
 `output`parameter is used to specify the optimized wasm contract file name
 
 `keep-custom` is the wasm file used to set the output retained `custom_section', only for debugging purposes
-
 
 
 ## License
