@@ -10,8 +10,8 @@
 * 合约存在入口函数`invoke`,参数和返回值均为空;
 * 清理合约中没有使用的函数，导入导出项;
 * 检查合约中的浮点数指令;
-* 导入项只能是Ontology runtime api;
-* 检查合约的内存和Table使用上限，防止恶意的合约攻击
+* 检查所有导入项为Ontology runtime api，且输入输出参数完全匹配;
+* 检查合约的内存和Table使用上限是否超过规定的值，防止恶意的合约攻击
 * 清理data section中的零值
 * 清理custom section
 
@@ -48,6 +48,7 @@ ARGS:
 
 `input`参数用来指定要优化的wasm合约文件，可使用[ontology-wasm-cdt-cpp](https://github.com/ontio/ontology-wasm-cdt-cpp)或者[ontology-wasm-cdt-rust](https://github.com/ontio/ontology-wasm-cdt-rust)开发生成。
 `output`参数用来指定优化后的wasm合约文件名
+`keep-custom`用来设置输出的wasm文件是否保留`custom_section`,只用于调试用
 
 ## License
 
