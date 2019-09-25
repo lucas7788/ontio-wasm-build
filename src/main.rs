@@ -55,6 +55,10 @@ fn main() -> Result<(), Error> {
     let mut io = ::std::fs::File::create(output)?;
     io.write_all(&buf)?;
 
+    let output_hex = output.to_string() + ".str";
+    let mut io = ::std::fs::File::create(output_hex)?;
+    io.write_all(hex::encode(&buf).as_bytes())?;
+
     Ok(())
 }
 
